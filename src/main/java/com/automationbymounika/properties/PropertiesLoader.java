@@ -7,7 +7,7 @@ import java.io.FileInputStream;
 import java.util.Properties;
 
 public class PropertiesLoader {
-    static Properties configProperties;
+    public static Properties configProperties;
 
     public static String runOnBrowser;
     public static Boolean takeScreenshot;
@@ -22,6 +22,8 @@ public class PropertiesLoader {
     public static boolean remoterun;
     public static boolean deleteCookies;
     public static boolean headless;
+    public static String appUrl;
+
 
 
     public static void initializeProperties() throws Exception {
@@ -43,6 +45,7 @@ public class PropertiesLoader {
         remoterun = Boolean.valueOf(configProperties.getProperty("RemoteRun"));
         deleteCookies = Boolean.valueOf(configProperties.getProperty("DeleteCookies"));
         headless = Boolean.valueOf(configProperties.getProperty("Headless"));
+        appUrl = configProperties.getProperty("appUrl");
 
 
     }
