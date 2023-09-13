@@ -6,12 +6,11 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
-public class WebLibrary {
+public class BaseActions {
     //This class contains all the reusable methods that can be used to perform some actions.
     WebDriver driver;
-    WebLibrary(WebDriver driver) {
+    BaseActions(WebDriver driver) {
         this.driver = driver;
     }
 
@@ -50,17 +49,17 @@ public class WebLibrary {
         }
         return null;
     }
-    public void selectValueFromDropdown(String elementRef, String findBy, String valueToSelect) {
+    public void selectValueFromDropdown(String elementRef, String findBy, String option) {
         try {
             ElementFindBy findObj = new ElementFindBy(driver);
             WebElement elementBy = findObj.findElementBy(elementRef);
             Select dropdownSelect = new Select(elementBy);
             if (findBy.equalsIgnoreCase("visible Text")){
-                dropdownSelect.selectByVisibleText(valueToSelect);
+                dropdownSelect.selectByVisibleText(option);
             } else if (findBy.equalsIgnoreCase("Value")){
-                dropdownSelect.selectByValue(valueToSelect);
+                dropdownSelect.selectByValue(option);
             } else if (findBy.equalsIgnoreCase("index")) {
-                int index = Integer.parseInt(valueToSelect);
+                int index = Integer.parseInt(option);
                 dropdownSelect.selectByIndex(index);
             }
         }catch(Exception e) {
