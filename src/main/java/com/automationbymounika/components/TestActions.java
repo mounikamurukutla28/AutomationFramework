@@ -10,29 +10,30 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
 public class TestActions {
-    WebDriver driver;
-    DriverManager driverManager;
+    public WebDriver driver;
+    public DriverManager driverManager;
+    public BaseActions pageActions;
     @BeforeSuite
     public void setUpConfigurations() throws Exception{
         PropertiesLoader.initializeProperties();
         PropertiesValidator.validateConfigurations();
+        driverManager = new DriverManager();
     }
     @BeforeMethod
     public void setUpBrowser() throws Exception {
-        driverManager = new DriverManager();
-        driverManager.loadDriver();
-        driver = driverManager.getDriver();
-        BaseActions pageActions = new BaseActions(driver);
+        driverManager.loadDriver(); //loading the driver or opening the driver
+        driver = driverManager.getDriver(); //getting the driver instance from driverManager and set it to BaseActions class
+        pageActions = new BaseActions(driver);
         pageActions.launchUrl(PropertiesLoader.appUrl);
     }
 
 
-    @AfterMethod
-    public void tearDownBrowser() {
-        driverManager.closeBrowser();
-    }
-    @AfterSuite
-    public void tearDownObjects() throws Exception{
-        PropertiesLoader.configProperties = null; //so that it will destroyed.
-    }
+//    @AfterMethod
+//    public void tearDownBrowser() {
+//        driverManager.closeBrowser();
+//    }
+//    @AfterSuite
+//    public void tearDownObjects() throws Exception{
+//        PropertiesLoader.configProperties = null; //so that it will destroyed.
+//    }
 }

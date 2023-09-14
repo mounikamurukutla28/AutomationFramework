@@ -10,7 +10,7 @@ import java.util.List;
 public class BaseActions {
     //This class contains all the reusable methods that can be used to perform some actions.
     WebDriver driver;
-    BaseActions(WebDriver driver) {
+    public BaseActions(WebDriver driver) {
         this.driver = driver;
     }
 
