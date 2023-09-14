@@ -32,12 +32,13 @@ public class BaseActions {
         } catch(Exception e) {
         }
     }
-    public void getTextFromElement(String elementRef) {
+    public String getTextFromElement(String elementRef) {
         try {
             ElementFindBy findObj = new ElementFindBy(driver);
             WebElement elementBy = findObj.findElementBy(elementRef);
-            elementBy.getText();
+            return elementBy.getText();
         } catch(Exception e) {
+            return null;
         }
     }
     public String getAttributeForElement(String elementRef, String attributeType){
