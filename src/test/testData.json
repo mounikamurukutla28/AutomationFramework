@@ -1,0 +1,20 @@
+{
+  "LoginTest": [
+    {
+      "username": "Admin",
+      "password": "admin123"
+    },
+    {
+      "username": "Viswa",
+      "password": "viswa123"
+    }
+  ],
+  "WelcomePageTest": [
+    {
+
+    },
+    {
+
+    }
+  ]
+}

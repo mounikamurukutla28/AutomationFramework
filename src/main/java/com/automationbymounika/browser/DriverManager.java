@@ -5,13 +5,13 @@ import org.openqa.selenium.WebDriver;
 
 public class DriverManager {
     //The driver manager is responsible for getting the driver, loading the driver, closing the driver, quitting the driver
-    public static WebDriver driver;
+    public static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     public WebDriver getDriver() {
 
-        return driver;
+        return driver.get();
     }
     public void setDriver(WebDriver driver) {
-        this.driver = driver;
+        this.driver.set(driver);
     }
     public void loadDriver(){
         Browser browser = null;
@@ -35,9 +35,9 @@ public class DriverManager {
         setDriver(driver); //setting the driver so that the global driver gets instantiated
     }
     public void closeBrowser() {
-        driver.close();
+        driver.get().close();
     }
     public void closeAllBrowsers() {
-        driver.quit();
+        driver.get().quit();
     }
 }

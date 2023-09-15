@@ -10,7 +10,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
 public class TestActions {
-    public WebDriver driver;
+    public ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     public DriverManager driverManager;
     public BaseActions pageActions;
     @BeforeSuite(alwaysRun = true)
@@ -22,16 +22,18 @@ public class TestActions {
     @BeforeMethod
     public void setUpBrowser() throws Exception {
         driverManager.loadDriver(); //loading the driver or opening the driver
-        driver = driverManager.getDriver(); //getting the driver instance from driverManager and set it to BaseActions class
-        pageActions = new BaseActions(driver);
+//        driver = driverManager.getDriver(); //getting the driver instance from driverManager and set it to BaseActions class
+        driver.set(driverManager.getDriver()); // this is how we have to set driver when making the driver as threadlocal
+        // and when ever you have to call driver instead of driver we have to use driver.get() to call the driver
+        pageActions = new BaseActions(driver.get());
         pageActions.launchUrl(PropertiesLoader.appUrl);
     }
 
 
-//    @AfterMethod(alwaysRun=true)
-//    public void tearDownBrowser() {
-//        driverManager.closeBrowser();
-//    }
+    @AfterMethod(alwaysRun=true)
+    public void tearDownBrowser() {
+        driverManager.closeBrowser();
+    }
 //    @AfterSuite
 //    public void tearDownObjects() throws Exception{
 //        PropertiesLoader.configProperties = null; //so that it will destroyed.
