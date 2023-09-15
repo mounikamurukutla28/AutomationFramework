@@ -13,7 +13,7 @@ public class TestActions {
     public WebDriver driver;
     public DriverManager driverManager;
     public BaseActions pageActions;
-    @BeforeSuite
+    @BeforeSuite(alwaysRun = true)
     public void setUpConfigurations() throws Exception{
         PropertiesLoader.initializeProperties();
         PropertiesValidator.validateConfigurations();
@@ -28,7 +28,7 @@ public class TestActions {
     }
 
 
-//    @AfterMethod
+//    @AfterMethod(alwaysRun=true)
 //    public void tearDownBrowser() {
 //        driverManager.closeBrowser();
 //    }
